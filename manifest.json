@@ -5,13 +5,21 @@
   "description": "This extension shows a Google Image search result for the current page",
   "version": "1.0",
 
+  "content_scripts": [
+    {
+      "matches": ["*://www.safaribooksonline.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_title": "Save current book!"
   },
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/",
+    "tabs",
     "pageCapture"
   ]
 }
