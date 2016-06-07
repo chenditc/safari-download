@@ -3,11 +3,12 @@ chrome extension to help download book from safaribooksonline.com
 
 ## Install
 ### Option 1
-Go to https://chrome.google.com/webstore/detail/safari-books-download/anlpljppoinmpaedoilhjibjehpjhcob?hl=en-US&gl=US and click install
+1. Open https://chrome.google.com/webstore/detail/safari-books-download/anlpljppoinmpaedoilhjibjehpjhcob?hl=en-US&gl=US 
+2. Click "Add to chrome" button.
 
 ### Option 2
-1. Download crx file
-2. Open "chrome://extensions/"
+1. Download crx file https://github.com/chenditc/safari-download/blob/master/chrome-extension.crx?raw=true
+2. Open chrome://extensions/
 3. Drag the crx file to "chrome://extensions/" page
 
 ## Usage
