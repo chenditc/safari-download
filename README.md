@@ -1,5 +1,5 @@
 # safari-download
-chrome extension to help download book from safaribooksonline.com
+chrome extension to help download book from http://www.safaribooksonline.com/
 
 ## Install
 ### Option 1
