@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
+  "name": "Safari Books Download",
+  "description": "Download the books into a mhtml file. You need to have the permission to read the book first.",
   "version": "1.0",
 
   "content_scripts": [

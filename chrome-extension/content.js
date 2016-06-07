@@ -6,11 +6,19 @@ function getBookNameFromUrl(book_url) {
     return book_name
 }
 
+function removeHashTag(book_url) {
+    hash_index = book_url.indexOf("#");
+    if (hash_index > 0) {
+        return book_url.substring(0, hash_index);
+    }
+    return book_url;
+}
+
 // Listen for messages
 chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
     console.log(msg);
     // If the received message has the expected format...
-    if (msg.text === 'get_name_url_map') {
+    if (msg.text === 'get_url_name_map') {
         var chapter_count = 0;
         function getNextChapterNum() {
           function zeroPad(num, places) {
@@ -22,7 +30,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
         }
 
         // Get all chapter name and their url
-        var name_url_map = {};
+        var url_name_map = {};
 
         // Get chapter list
         var tocList = document.getElementsByClassName("detail-toc")[0];
@@ -34,16 +42,15 @@ chrome.runtime.onMessage.addListener(function (msg, sender, sendResponse) {
           for(var j = 0; j < chapter_dom_list.length; j++) {
               chapter_dom = chapter_dom_list[j]
               var chapter_url = "https://www.safaribooksonline.com/" + chapter_dom.getAttribute("href");
-              if (chapter_url.indexOf("#") != -1) {
-                // Skip duplicate page with different hashtag
-                continue
-              }
-              var book_name = getBookNameFromUrl(chapter_url);
-              var chapter_number = getNextChapterNum();
-              name_url_map[book_name + "-ch" + chapter_number] = chapter_url
+              chapter_url = removeHashTag(chapter_url)
+              if (url_name_map[chapter_url] == undefined) {
+                var book_name = getBookNameFromUrl(chapter_url);
+                var chapter_number = getNextChapterNum();
+                url_name_map[chapter_url] = book_name + "-ch" + chapter_number 
+              } 
           }
         }
-        name_url_map_json = JSON.stringify(name_url_map);
-        sendResponse(name_url_map_json);
+        url_name_map_json = JSON.stringify(url_name_map);
+        sendResponse(url_name_map_json);
     }
 });
