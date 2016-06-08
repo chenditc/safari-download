@@ -3,7 +3,7 @@
 
   "name": "Safari Books Download",
   "description": "Download the books into a mhtml file. You need to have the permission to read the book first.",
-  "version": "1.0",
+  "version": "1.1",
 
   "content_scripts": [
     {
