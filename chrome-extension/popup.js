@@ -7,7 +7,7 @@
  */
 function renderStatus(statusText) {
   if (statusText == undefined) { 
-    var statusText = "Downloading book, please do not change tab.\n" + "Downloaded " + download_count.toString() + "/" + expected_download_count.toString(); 
+    var statusText = "I'm working, please do not change tab or close me.\n" + "Downloaded " + download_count.toString() + "/" + expected_download_count.toString(); 
     if (download_count == expected_download_count && download_count > 0) {
       var button = document.getElementById('download-button');
       button.disabled = false;
@@ -53,19 +53,7 @@ function createTabInBackground(url, callback) {
 
 }
 
-function saveUrl(url, file_name) {
-  function saveTab(tabId) {
-    // Save page blob
-    function saveMhtml(mhtml){
-      saveAs(mhtml, file_name + '.mhtml');
-      chrome.tabs.remove(tabId);
-      download_count++;
-      renderStatus();
-    }
-    chrome.pageCapture.saveAsMHTML({ tabId: tabId }, saveMhtml);
-  }
-  createTabInBackground(url, saveTab); 
-}
+
 
 function getBookNameFromUrl(book_url) {
     var re = new RegExp('https://www.safaribooksonline.com/library/view/(\.+)/\\d+/\.*');
@@ -77,25 +65,58 @@ function getBookNameFromUrl(book_url) {
     return book_name
 }
 
-function downloadButtonCallback(url) {
+function saveUrls(url_name_map) {
+  // Termination condition, when url_name_map is empty
+  var keys = Object.keys(url_name_map)
+  if ( keys.length == 0) {
+    return
+  }
+  var url = keys[0];
+  var file_name = url_name_map[url];
+  delete url_name_map[url];
+
+  // Use promise to ensure one tab will finish download before next tab starts
+  // This can save memory on low memory machine
+  var promise = new Promise(
+    function(resolve, reject) {
+      createTabInBackground(url, 
+        function saveTab(tabId) {
+          chrome.pageCapture.saveAsMHTML({ tabId: tabId }, 
+            // Save page blob
+            function saveMhtml(mhtml){
+              saveAs(mhtml, file_name + '.mhtml');
+              chrome.tabs.remove(tabId);
+              download_count++;
+              renderStatus();
+              // Finish current download job, 
+              // Resolve and pass the map to next iteration
+              resolve(url_name_map);
+            }
+          );
+        }
+      ); 
+    }
+  );
+  promise.then(saveUrls);
+}
+
+function downloadButtonCallback(chapter_list_url) {
     var button = document.getElementById('download-button');
     button.disabled = true;
     renderStatus();
 
-    createTabInBackground(url, function (tabId) {
+    createTabInBackground(chapter_list_url, function (tabId) {
       function downloadBook(url_name_map_json) {
-          console.log("Received url_name_map_json:")
-          console.log(url_name_map_json);
-          chrome.tabs.remove(tabId);
+        console.log("Received url_name_map_json:")
+        console.log(url_name_map_json);
+        chrome.tabs.remove(tabId);
 
-          url_name_map = JSON.parse(url_name_map_json);
+        url_name_map = JSON.parse(url_name_map_json);
 
-          for (var url in url_name_map) {
-              console.log(url);
-              saveUrl(url, url_name_map[url]);
-              expected_download_count++;
-              renderStatus();
-          }
+        expected_download_count += Object.keys(url_name_map).length;
+        renderStatus();
+
+        saveUrls(url_name_map);
       }
 
       chrome.tabs.sendMessage(tabId, {text: 'get_url_name_map'}, downloadBook);
