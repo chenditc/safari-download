@@ -3,11 +3,11 @@ chrome extension to help download book from http://www.safaribooksonline.com/
 
 ## Install
 ### Option 1
-1. Open https://chrome.google.com/webstore/detail/safari-books-download/anlpljppoinmpaedoilhjibjehpjhcob?hl=en-US&gl=US 
+1. Open [Chrome Extension Install](https://chrome.google.com/webstore/detail/safari-books-download/anlpljppoinmpaedoilhjibjehpjhcob?hl=en-US&gl=US)
 2. Click "Add to chrome" button.
 
 ### Option 2
-1. Download crx file https://github.com/chenditc/safari-download/blob/master/chrome-extension.crx?raw=true
+1. Download crx file [Chrome Extension Package Download](https://github.com/chenditc/safari-download/blob/master/chrome-extension.crx?raw=true)
 2. Open url: "chrome://extensions/" in chrome
 3. Drag the crx file to "chrome://extensions/" page
 
