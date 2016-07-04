@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import glob
+import re
+import os
+import zipfile
+
+file_names = glob.glob('./*.mhtml')
+
+file_name_pattern = r'\./(.+)-ch[0-9][0-9][0-9].mhtml'
+
+book_names = {}
+
+for file_name in file_names:
+    # Move file to specific directory
+    match = re.match(file_name_pattern, file_name)
+    if match == None:
+        print file_name
+    book_name = match.groups()[0]
+    dir_path = './' + book_name
+    book_names[book_name] = dir_path
+    if not os.path.exists(dir_path):
+        os.mkdir(dir_path)
+    os.rename(file_name, file_name.replace('./', dir_path + '/'))
+
+def zipdir(path, ziph):
+    # ziph is zipfile handle
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            ziph.write(os.path.join(root, file))
+
+# zip book directory
+for book_name, book_path in book_names.items():
+    zipf = zipfile.ZipFile('safaribook-{0}.zip'.format(book_name), 'w', zipfile.ZIP_DEFLATED)
+    zipdir(book_path, zipf)
+    zipf.close()
