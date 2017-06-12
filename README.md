@@ -1,9 +1,9 @@
 # safari-download
-chrome extension to help download safari books online from http://www.safaribooksonline.com/
+chrome extension to help download safari books online from https://www.safaribooksonline.com/
 
 ## Prerequisites
 1. You need to have a valid Safari Books Online account which can be used to browse all chapters of a book.
-2. This extension only works for domain http://www.safaribooksonline.com/.
+2. This extension only works for domain https://www.safaribooksonline.com/.
 
 ## Install
 ### Option 1
