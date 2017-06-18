@@ -5,18 +5,16 @@
   "description": "Download the books into a mhtml file. You need to have the permission to read the book first.",
   "version": "1.1",
 
-  "content_scripts": [
-    {
-      "matches": ["*://www.safaribooksonline.com/*"],
-      "js": ["content.js"]
-    }
-  ],
+  "background": {
+    "scripts": ["bluebird.js", "jszip.js", "event_page.js"],
+    "persistent": false
+  },
 
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "popup.html",
     "default_title": "Save current book!"
   },
+
   "permissions": [
     "activeTab",
     "tabs",
