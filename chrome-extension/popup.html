@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <title>safari-download</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 600px;
+      }
+      @keyframes blink {50% { color: transparent }}
+      .loader__dot { animation: 1s blink infinite }
+      .loader__dot:nth-child(2) { animation-delay: 250ms }
+      .loader__dot:nth-child(3) { animation-delay: 500ms }
+    </style>
+
+
+
+  </head>
+  <body style="width:480px;">
+
+    <p id="error-message" class="bg-warning"></p>
+
+    <div class="loader" id="loading">
+      <p class="bg-success">
+        <strong>
+            Loading book info
+          <span class="loader__dot">.</span>
+          <span class="loader__dot">.</span>
+          <span class="loader__dot">.</span>
+        </strong>
+      </p>
+    </div>
+
+    <div id="book-info" class="container">
+      <h4 id="book-info-notice"></h4>
+
+      <img id="book-cover" src="" class="img-fluid">
+      <p class="bg-success">
+        <span ><strong>Book Name: </strong></span><span id="book-name"></span>
+      </p>
+      <p class="bg-success">
+        <span ><strong>Chapters: </strong></span>
+        <span id="loading-chapter-list">Loading chapters ... Please wait.</span>
+      </p>
+
+      <button id="select-all-button" type="button" style="display: none;" class="btn btn-outline-primary">Select All</button>
+      <button id="deselect-all-button" type="button" style="display: none;" class="btn btn-outline-primary">Deselect All</button>
+
+      <ul id="book-chapter-list" class="list-group">
+      </ul>
+
+    </div>
+
+    <div id="download-section">
+      <p id="download-warning" style="display: none;" class="bg-warning"></p>
+      <button id="download-button" type="button" style="display: none;" class="btn btn-primary">Download above chapters as zip package</button>
+      <p id="book-name"><strong></strong></p>
+      <div id="status"></div>
+      <img id="image-result" hidden>
+    </div>
+
+    <link rel="stylesheet" href="bootstrap.min.css">
+
+    <script src="bluebird.js"></script>
+    <script src="jszip.js"></script>
+    <script src="popup.js"></script>
+
+    <script src="jquery-3.1.1.slim.min.js"></script>
+    <script src="tether.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+  </body>
+</html>
+

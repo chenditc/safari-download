@@ -1,13 +1,7 @@
-chrome.browserAction.onClicked.addListener((tab) => {
-  let downloadBook = new DownloadBook(tab.url)
-  downloadBook.run()
-})
 
 
 class DownloadBook {
-  constructor(url) {
-    this.bookId = this.getBookId(url)
-  }
+
 
   // downloads the book
   run() {
@@ -101,11 +95,4 @@ class DownloadBook {
     window.URL.revokeObjectURL(url)
   }
 
-  get(url) {
-    return fetch(url, {
-      credentials: 'include'
-    }).then((res) => {
-      return res.json()
-    })
-  }
 }
