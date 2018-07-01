@@ -1,8 +1,8 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
 
   "name": "Safari Books Download",
-  "description": "Download the books into a mhtml file. You need to have the permission to read the book first.",
+  "description": "Download the books into mhtml files. Safaribooks subscription Required. Works only on www.safaribooksonline.com domain.",
   "version": "1.2",
 
   "background": {
