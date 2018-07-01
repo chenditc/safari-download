@@ -44,7 +44,7 @@ class BookInfo {
           $('#loading').hide();
 
           if (this.bookInfo.title == null) {
-              $('#error-message').text("I'm not able to get the book title, please check if you have logged in. \nIf you are sure you have logged in, please report this incidence to: \nhttps://github.com/chenditc/safari-download/issues");
+              $('#error-message').text("I'm not able to get the book title, please check if you have logged in with a *valid* account. \n A valid account means you can load and read the full book. \nIf you are sure you have logged in, please report this incidence to: \nhttps://github.com/chenditc/safari-download/issues");
               $('#error-message').show();
               return;
           }
