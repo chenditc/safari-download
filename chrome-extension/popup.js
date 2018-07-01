@@ -117,6 +117,7 @@ class BookInfo {
         if (checkbox.checked) {
             var chapter_index = $(chapter_dom).attr("chapterIndex");
             var chapter_info = this.chapters[parseInt(chapter_index)];
+            chapter_info.chapterIndex = chapter_dom_index;
             selected_chapters.push(chapter_info);
         }
     }
@@ -194,7 +195,8 @@ class BookInfo {
 
   downloadChapter(chapterInfo) {
       return this.capturePage(chapterInfo.web_url).then((mhtml) => {
-        let name = chapterInfo.filename.replace(/(html|xhtml)$/, 'mhtml')
+        let name = chapterInfo.filename.replace(/(html|xhtml)$/, 'mhtml');
+        name = "ch" + chapterInfo.chapterIndex.toString() + "-" + name;
         return {
           name: name,
           mhtml: mhtml
