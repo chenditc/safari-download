@@ -196,7 +196,8 @@ class BookInfo {
   downloadChapter(chapterInfo) {
       return this.capturePage(chapterInfo.web_url).then((mhtml) => {
         let name = chapterInfo.filename.replace(/(html|xhtml)$/, 'mhtml');
-        name = "ch" + chapterInfo.chapterIndex.toString() + "-" + name;
+        let chapterNum = ('00000' + chapterInfo.chapterIndex.toString()).slice(-3)
+        name = "ch" + chapterNum + "-" + name;
         return {
           name: name,
           mhtml: mhtml

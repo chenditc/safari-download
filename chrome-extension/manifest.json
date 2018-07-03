@@ -3,7 +3,7 @@
 
   "name": "Safari Books Download",
   "description": "Download the books into mhtml files. Safaribooks subscription Required. Works only on www.safaribooksonline.com domain.",
-  "version": "1.4",
+  "version": "1.5",
 
   "background": {
     "scripts": ["bluebird.js", "jszip.js"],
