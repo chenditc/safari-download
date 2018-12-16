@@ -55,7 +55,7 @@ class BookInfo {
           $("#book-cover").attr("src", this.bookInfo.cover);
           $('#book-info').show();
 
-          let chapter_list_url = `https://www.safaribooksonline.com/api/v1/book/${this.bookId}/chapter/`
+          let chapter_list_url = `https://learning.oreilly.com/api/v1/book/${this.bookId}/chapter/`
           this.getChapterList(chapter_list_url)
               .then( (chapters) => this.fetchChapterList(chapters))
               .then( () => this.renderChapterList());
@@ -79,7 +79,7 @@ class BookInfo {
         })
     }
     else {
-      var obj = $('#error-message').text('This is not a webpage we support,\n only domain "www.safaribooksonline.com" is supported. \nPlease check your url is in the form of: \n"https://www.safaribooksonline.com/library/view/{bookname}/{numbers}/..."');
+      var obj = $('#error-message').text('This is not a webpage we support,\n only domain "learning.oreilly.com" is supported. \nPlease check your url is in the form of: \n"https://learning.oreilly.com/library/view/{bookname}/{numbers}/..."');
       obj.html(obj.html().replace(/\n/g,'<br/>'));
       $('#error-message').show();
       $('#loading').hide();
@@ -91,13 +91,13 @@ class BookInfo {
   // description page
   getBookId(url) {
     // match a url like:
-    // https://www.safaribooksonline.com/library/view/startup-opportunities-2nd/9781119378181/
-    // https://www.safaribooksonline.com/library/view/startup-growth-engines/77961SEM00001/
+    // https://learning.oreilly.com/library/view/startup-opportunities-2nd/9781119378181/
+    // https://learning.oreilly.com/library/view/startup-growth-engines/77961SEM00001/
     let match = url.match(/\/library\/view\/[^\/]+\/(\w+)\//)
     let bookId = match && match[1]
 
     if (!bookId) {
-      console.log('could not extract book id from url, only domain "www.safaribooksonline.com“ is supported.');
+      console.log('could not extract book id from url, only domain "learning.oreilly.com“ is supported.');
       return null;
     }
 
@@ -129,7 +129,7 @@ class BookInfo {
   }
 
   getBookInfo() {
-    let url = `https://www.safaribooksonline.com/api/v1/book/${this.bookId}/`
+    let url = `https://learning.oreilly.com/api/v1/book/${this.bookId}/`
     return fetch(url, {
       credentials: 'include'
     }).then((res) => {

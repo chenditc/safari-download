@@ -17,8 +17,8 @@ class DownloadBook {
   // description page
   getBookId(url) {
     // match a url like:
-    // https://www.safaribooksonline.com/library/view/startup-opportunities-2nd/9781119378181/
-    // https://www.safaribooksonline.com/library/view/startup-growth-engines/77961SEM00001/
+    // https://learning.oreilly.com/library/view/startup-opportunities-2nd/9781119378181/
+    // https://learning.oreilly.com/library/view/startup-growth-engines/77961SEM00001/
     let match = url.match(/\/library\/view\/[^\/]+\/(\w+)\//)
     let bookId = match && match[1]
 
@@ -30,7 +30,7 @@ class DownloadBook {
   }
 
   getBookInfo() {
-    let url = `https://www.safaribooksonline.com/api/v1/book/${this.bookId}/`
+    let url = `https://learning.oreilly.com/api/v1/book/${this.bookId}/`
     return this.get(url)
   }
 
