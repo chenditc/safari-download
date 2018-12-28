@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Safari Books Download",
-  "description": "Download the books into mhtml files. Safaribooks subscription Required. Works only on www.safaribooksonline.com domain.",
-  "version": "1.5",
+  "description": "Download the books into mhtml files. Safaribooks subscription Required. Works only on learning.oreilly.com domain.",
+  "version": "1.5.1",
 
   "background": {
     "scripts": ["bluebird.js", "jszip.js"],
@@ -21,6 +21,6 @@
     "tabs",
     "pageCapture",
     "downloads",
-    "*://*.safaribooksonline.com/*"
+    "*://*.oreilly.com/*"
   ]
 }
